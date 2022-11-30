@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package proto;
+
+option go_package = "/server/proto";
+
+message Entity {
+  int64 id = 1;
+  string name = 2;
+}
+
+message AddEntityRequest {
+  string name = 1;
+}
+
+message AddEntityResponse {
+  int64 id = 1;
+}
+
+message GetEntityRequest {
+  int64 id = 1;
+}
+
+message GetEntityResponse {
+  Entity entity = 1;
+}
+
+message GetAllRequest {}
+
+message GetAllResponse {
+  repeated Entity entities = 1;
+}
+
+service EntityService {
+  rpc Add (AddEntityRequest) returns (AddEntityResponse);
+  rpc Get (GetEntityRequest) returns (GetEntityResponse);
+  rpc GetAll (GetAllRequest) returns (GetAllResponse);
+}
